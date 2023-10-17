@@ -45,10 +45,13 @@ function ordenar(){
     // Obtengo contenedor
     const contenedor = document.getElementById("ordenar");
 
+    // Obtengo hijos
     let hijos = contenedor.children;
 
+    // Convierto coleccion HTML a Array para poder ordenar
     let elementos = Array.from(hijos);
 
+    // Ordeno por texto
     elementos.sort(function(a, b){
         
         if(a.innerText > b.innerText) return 1;
@@ -59,10 +62,11 @@ function ordenar(){
 
     })
 
+    // Recorro array y añado al contenedor
     for(let e of elementos){
 
         contenedor.append(e);
-        
+
     }
 
 }
