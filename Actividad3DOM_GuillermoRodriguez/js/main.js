@@ -40,6 +40,8 @@ function copiar(){
 
 }
 
+// Ejercicio 3
+
 function ordenar(){
 
     // Obtengo contenedor
@@ -71,6 +73,58 @@ function ordenar(){
 
 }
 
+// Ejercicio 4
+
+function duplicar_y_ordenar(){
+
+    // Copiar
+
+    // Obtengo contenedores
+    const contenedorOriginal = document.getElementById("desordenado");
+    const contenedorCopia = document.getElementById("ordenado");
+
+    // Obtengo lista de hijos
+    let hijos = contenedorOriginal.children;
+
+    // Recorro lista
+    for (let index = 0; index < hijos.length; index++) {
+
+        // Copio nodos
+        let copia = hijos[index].cloneNode(true);
+
+        // Añado
+        contenedorCopia.append(copia);
+        
+    }
+
+    // Ordenar
+
+    // Obtengo hijos
+    let hijosCopia = contenedorCopia.children;
+
+    // Convierto coleccion HTML a Array para poder ordenar
+    let elementos = Array.from(hijosCopia);
+
+    // Ordeno por texto
+    elementos.sort(function(a, b){
+        
+        if(a.innerText > b.innerText) return 1;
+
+        if(a.innerText < b.innerText) return -1;
+
+        return 0;
+
+    })
+
+    // Recorro array y añado al contenedor
+    for(let e of elementos){
+
+        contenedorCopia.append(e);
+
+    }
+
+}
+
 // main
 
 mover_al_ultimo();
@@ -78,3 +132,5 @@ mover_al_ultimo();
 copiar();
 
 ordenar();
+
+duplicar_y_ordenar();
