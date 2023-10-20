@@ -31,7 +31,7 @@ function funcionalidad(boton){
         for (const dia of dias) {
         
             divAAñadir = document.createElement("div");
-            divAAñadir.setAttribute("class", "col");
+            divAAñadir.setAttribute("class", "col-12");
             divAAñadir.innerText = dia;
     
             contenedorLista.append(divAAñadir);
@@ -49,7 +49,7 @@ function funcionalidad(boton){
         for (const mes of meses) {
         
             divAAñadir = document.createElement("div");
-            divAAñadir.setAttribute("class", "col");
+            divAAñadir.setAttribute("class", "col-12");
             divAAñadir.innerText = mes;
     
             contenedorLista.append(divAAñadir);
