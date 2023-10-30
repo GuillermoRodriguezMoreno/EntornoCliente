@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="form.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
   <body class="container">
@@ -14,14 +15,23 @@
 
         <label for="nombre" class="col-2">Nombre<span class="requerido">*</span>:</label>
         <input type="text" name="nombre" id="nombre" class="col-4" required>
+        <div class="col-2" id="nombreError">
+          <span class="error"></span>
+        </div>
         <div class="w-100"></div>  
 
         <label for="email" class="col-2">Email<span class="requerido">*</span>:</label>
         <input type="email" name="email" id="email" class="col-4" required>
+        <div class="col-2" id="emailError">
+          <span class="error"></span>
+        </div>
         <div class="w-100"></div>
 
         <label for="edad" class="col-2">Edad<span class="requerido">*</span>:</label>
         <input type="number" name="edad" id="edad" class="col-1" required min="18" max="120">
+        <div class="col-2" id="edadError">
+          <span class="error"></span>
+        </div>
         <div class="w-100"></div>
 
         <input type="submit" value="enviar" id="submit" class="col-2">
