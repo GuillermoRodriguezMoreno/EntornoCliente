@@ -48,7 +48,8 @@ function validaEmail(){
 
     let test = true;
 
-    if(email.validity.valueMissing) {
+    // Evitar usar valueMissing ya que es validacion HTML no JS
+    if(email.value.length < 1) {
         
         email.setCustomValidity("El email es obligatorio");
         test = false;
@@ -97,18 +98,56 @@ function validaNombre() {
 
     let test = true;
 
-    if(!nombre.validity.valid){
+    if(nombre.value.length < 1){
+
+        nombre.setCustomValidity("no puede estar vacio");
 
         test = false;
+
+    } else{
+
+        nombre.setCustomValidity("");
     }
 
     return test;
 
 }
-// function validaEmail(){
+function validaEdadJs(){
 
-// }
+    test = true;
 
+    if(edad.value.length < 1) {
+        
+        edad.setCustomValidity("La edad es obligatoria");
+        test = false;
+    }
+
+    else if(edad.value < 18){
+        
+        edad.setCustomValidity("Debe ser mayor de edad");
+        test = false;
+
+
+    }    
+    else if(edad.value > 120){
+
+        edad.setCustomValidity("La edad es demasiada alta");
+        test = false;
+
+
+    }
+
+    else{
+
+        edad.setCustomValidity(""); // importante este else para resetear!
+
+    }
+    
+    return test;
+    
+}
+
+// esta funcion usa la validacion HTML lo cual hay que evitar
 function validaEdad(){
 
     test = true;
@@ -149,7 +188,7 @@ function validaEdad(){
 
     let test = true;
 
-    if(!nombre.validity.valid){
+    if(!validaNombre()){
 
         nombreError.innerText = nombre.validationMessage
         nombreError.className = "error active"
@@ -173,7 +212,7 @@ function validaEdad(){
         emailError.innerText = "";
     }
 
-    if(!validaEdad()){
+    if(!validaEdadJs()){
 
         edadError.innerText = edad.validationMessage;
         edadError.className = "error active";
@@ -198,6 +237,8 @@ function validaEdad(){
 
 
 formulario.addEventListener("submit", validaFormulario);
+
+// La validacion depende de si el validationMessage esta vacio o no
 
 
 
