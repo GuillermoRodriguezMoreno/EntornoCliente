@@ -136,6 +136,21 @@ function validarComentario(){
 // Desactivo validacion HTML
 formulario.setAttribute("novalidate", true);
 
+// Añadir eventos
+nombre.addEventListener("input", validarNombre);
+validarNombre();
+
+email.addEventListener("input", validarEmail);
+validarEmail();
+
+telefono.addEventListener("input", validarTelefono);
+validarTelefono();
+
+comentario.addEventListener("input", validarComentario);
+validarComentario;
+
+// Validar formulario
+
 function validarFormulario(event){
 
     let test = true;
