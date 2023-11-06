@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Validación de formulario: Tarea 1</title>
+    <style>
+      body {
+        background-color: #fff;
+        color: #333;
+        font: 1em / 1.4 Helvetica Neue, Helvetica, Arial, sans-serif;
+        padding: 1em;
+        margin: 0;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>Tarea 1: Validación</h1>
+    <form>
+      <h2>Envíe sus comentarios</h2>
+      <ul>
+        <li>
+          <label for="uname">Nombre de usuario:</label>
+          <input type="text" name="uname" id="uname" pattern="[a-z]\.[a-z0-9]{3,}">
+        </li>
+        <li>
+          <label for="email">Email:</label>
+          <input type="text" name="email" id="email" pattern="[a-zA-z0-9]{1,}\.@vegasoft.com$">
+        </li>
+        <li>
+          <label for="phone">Teléfono:</label>
+          <input type="text" name="phone" id="phone" pattern="([0-9]{10}|([0-9]{3}(-|\ )[0-9]{3}(-|\ )[0-9]{4}))">
+        </li>
+        <li>
+          <label for="comment">Comentario:</label>
+          <textarea name="comment" id="comment">
+          </textarea>
+        </li>
+        <li>
+          <button>Enviar comentario</button>
+        </li>
+      </ul>
+    </form>
+
+    <script src="validation.js"></script>
+
+  </body>
+
+</html>
