@@ -19,6 +19,7 @@ function validarNombre(){
 
     let test = true;
 
+    // no este vacio
     if(nombre.value.length < 1){
 
         nombre.setCustomValidity("El nombre no puede estar vacio");
@@ -26,9 +27,18 @@ function validarNombre(){
 
     }
 
+    // Rango longitud
     else if(nombre.value.length < 5 || nombre.value.length > 20){
 
         nombre.setCustomValidity("El nombre debe tener entre 5 y 20 caracteres")
+        test = false;
+
+    }
+
+    // Expresion regular
+    else if(nombre.validity.patternMismatch){
+
+        nombre.setCustomValidity("El formato no es el adecuado")
         test = false;
 
     }
@@ -43,10 +53,20 @@ function validarNombre(){
 
 }
 
+function extraeDominio() {
+
+    let emailSeg = email.value.split("@");
+    let dominio = emailSeg[1];
+
+    return dominio;
+
+}
+
 function validarEmail(){
 
     let test = true;
 
+    // No puede estar vacio
     if(email.value.length < 1){
 
         email.setCustomValidity("El email es obligatorio");
@@ -54,6 +74,23 @@ function validarEmail(){
 
     }
 
+    // Debe tener dominio vegasoft.com
+    else if(extraeDominio() != "vegasoft.com") {
+        
+        email.setCustomValidity("El dominio debe ser vegasoft.com");
+        test = false;
+
+    }
+
+    // La expresion regular no es la correcta
+    else if(email.validity.patternMismatch){
+
+        email.setCustomValidity("El formato no es el adecuado")
+        test = false;
+
+    }
+
+    // El tipo no es el adecuado
     else if(email.validity.typeMismatch){
 
         email.setCustomValidity("El formato no es el adecuado");
@@ -81,6 +118,7 @@ function validarTelefono(){
     //     test = false;
     // }
 
+    // no puede estar vacio
     if(telefono.value.length < 1){
 
         telefono.setCustomValidity("El telefono no puede estar vacio")
@@ -88,9 +126,18 @@ function validarTelefono(){
 
     }
 
+    // La longitud es correcta
     else if(telefono.value.length > 15){
 
         telefono.setCustomValidity("El telefono no puede tener mas de 15 digitos")
+        test = false;
+
+    }
+
+    // La expresion regular es correcta
+    else if(telefono.validity.patternMismatch){
+
+        telefono.setCustomValidity("el formato del numero de telefono no es el adecuado")
         test = false;
 
     }
@@ -109,6 +156,7 @@ function validarComentario(){
 
     let test = true;
 
+    // No puede estar vacio
     if(comentario.value.length < 1){
 
         comentario.setCustomValidity("El comentario no puede estar vacio");
@@ -116,6 +164,7 @@ function validarComentario(){
 
     }
 
+    // Longitud no puede ser mayor de 200
     else if(comentario.value.length > 200){
 
         comentario.setCustomValidity("El comentario no puede tener mas de 200 caracteres")

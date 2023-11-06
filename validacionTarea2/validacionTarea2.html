@@ -15,6 +15,18 @@
       * {
         box-sizing: border-box;
       }
+      #uname:invalid, #email:invalid, #phone:invalid, #comment:invalid{
+
+        background-color: rgb(212, 119, 119);
+
+      }
+
+      #uname:valid, #email:valid, #phone:valid, #comment:valid{
+
+        background-color: rgb(199, 243, 186);
+
+        }
+
     </style>
   </head>
 
@@ -26,19 +38,30 @@
         <li>
           <label for="uname">Nombre de usuario:</label>
           <input type="text" name="uname" id="uname" pattern="[a-z]\.[a-z0-9]{3,}">
+          <div class="col-2" id="nombreError">
+            <span></span>
+          </div>
         </li>
         <li>
           <label for="email">Email:</label>
-          <input type="text" name="email" id="email" pattern="[a-zA-z0-9]{1,}\.@vegasoft.com$">
+          <input type="text" name="email" id="email" pattern="[a-zA-Z0-9]{1,}@vegasoft.com$">
+          <div class="col-2" id="emailError">
+            <span></span>
+          </div>
         </li>
         <li>
-          <label for="phone">Teléfono:</label>
-          <input type="text" name="phone" id="phone" pattern="([0-9]{10}|([0-9]{3}(-|\ )[0-9]{3}(-|\ )[0-9]{4}))">
+          <label for="phone">Teléfono:</label>             <!– (([0-9]{3}[ \.\-]?){2}[0-9]{4})? –>
+          <input type="text" name="phone" id="phone" pattern="([0-9]{10}|([0-9]{3}(-| )[0-9]{3}(-| )[0-9]{4}))">
+          <div class="col-2" id="telefonoError">
+            <span></span>
+          </div>
         </li>
         <li>
           <label for="comment">Comentario:</label>
-          <textarea name="comment" id="comment">
-          </textarea>
+          <textarea name="comment" id="comment" required></textarea>
+          <div class="col-2" id="comentarioError">
+            <span></span>
+          </div>
         </li>
         <li>
           <button>Enviar comentario</button>
