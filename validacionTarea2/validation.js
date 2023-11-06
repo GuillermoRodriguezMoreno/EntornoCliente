@@ -17,6 +17,7 @@ const comentarioError = document.querySelector("#comentarioError span");
 
 function validarNombre(){
 
+    let regex = new RegExp("[a-z]\.[a-z0-9]{3,}");
     let test = true;
 
     // no este vacio
@@ -30,15 +31,27 @@ function validarNombre(){
     // Rango longitud
     else if(nombre.value.length < 5 || nombre.value.length > 20){
 
-        nombre.setCustomValidity("El nombre debe tener entre 5 y 20 caracteres")
+        nombre.setCustomValidity("El nombre debe tener entre 5 y 20 caracteres");
         test = false;
 
     }
 
     // Expresion regular
+
+    /*
     else if(nombre.validity.patternMismatch){
 
         nombre.setCustomValidity("El formato no es el adecuado")
+        test = false;
+
+    }
+    */
+
+    // Usando solo js
+
+    else if (!regex.test(nombre.value)){
+
+        nombre.setCustomValidity("El formato del nombre no es el adecuado");
         test = false;
 
     }
@@ -64,6 +77,7 @@ function extraeDominio() {
 
 function validarEmail(){
 
+    let regex = new RegExp("[a-zA-Z0-9]{1,}@vegasoft.com$");
     let test = true;
 
     // No puede estar vacio
@@ -83,9 +97,18 @@ function validarEmail(){
     }
 
     // La expresion regular no es la correcta
-    else if(email.validity.patternMismatch){
 
-        email.setCustomValidity("El formato no es el adecuado")
+    /*else if(email.validity.patternMismatch){
+
+        email.setCustomValidity("El formato no es el adecuado");
+        test = false;
+
+    }*/
+
+    // Usando solo js
+    else if (!regex.test(email.value)){
+
+        email.setCustomValidity("El formato del email no es el adecuado");
         test = false;
 
     }
@@ -110,13 +133,8 @@ function validarEmail(){
 
 function validarTelefono(){
 
+    let regex = new RegExp("([0-9]{10}|([0-9]{3}(-| )[0-9]{3}(-| )[0-9]{4}))")
     let test = true;
-
-    // if(isNan(telefono.value)){
-
-    //     telefono.setCustomValidity("El telefono debe ser un numero")
-    //     test = false;
-    // }
 
     // no puede estar vacio
     if(telefono.value.length < 1){
@@ -135,9 +153,20 @@ function validarTelefono(){
     }
 
     // La expresion regular es correcta
+
+    /*
     else if(telefono.validity.patternMismatch){
 
         telefono.setCustomValidity("el formato del numero de telefono no es el adecuado")
+        test = false;
+
+    }
+    */
+
+    // Usando solo js
+    else if (!regex.test(telefono.value)){
+
+        telefono.setCustomValidity("El formato del telefono no es el adecuado");
         test = false;
 
     }
