@@ -17,7 +17,7 @@ const comentarioError = document.querySelector("#comentarioError span");
 
 function validarNombre(){
 
-    let regex = new RegExp("[a-z]\.[a-z0-9]{3,}");
+    let regex = new RegExp('[a-z]\\.[a-z0-9]{3,}');
     let test = true;
 
     // no este vacio
