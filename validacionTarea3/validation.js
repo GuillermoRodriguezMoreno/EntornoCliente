@@ -2,7 +2,6 @@
 
 const email = document.getElementById("mail");
 const formulario = document.querySelector("form");
-
 const emailError = document.querySelector("#emailError span");
 
 // Funciones
@@ -15,31 +14,23 @@ function validaEmail(){
 
         email.setCustomValidity("El email debe tener al menos 10 caracteres")
         test = false;
-
-    }
-
-    else if(email.validity.typeMismatch){
-
-        email.setCustomValidity("El formato no es el adecuado")
-        test = false;
-
-    }
-
-    else if(email.validity.valueMissing){
-
-        email.setCustomValidity("El email es obligatorio")
-        test = false;
-
-    }
-
-    else if(email.validity.patternMismatch){
+        
+    }else if(email.validity.typeMismatch){
 
         email.setCustomValidity("El email debe tener al menos una letra, @, una letra, un punto y un dominio de minimo dos letras. Ejemplo: a@a.uk")
         test = false;
 
-    }
+    }else if(email.validity.valueMissing){
 
-    else{
+        email.setCustomValidity("El email es obligatorio")
+        test = false;
+
+    }else if(email.validity.patternMismatch){
+
+        email.setCustomValidity("El email debe tener al menos una letra, @, una letra, un punto y un dominio de minimo dos letras. Ejemplo: a@a.uk")
+        test = false;
+
+    }else{
 
         email.setCustomValidity("");
 
@@ -56,7 +47,7 @@ validaEmail();
 // Eliminar validacion HTML
 formulario.setAttribute("novalidate", true);
 
-
+// Valida formulario
 function validaFormulario(event){
 
     let test = true;
@@ -66,9 +57,7 @@ function validaFormulario(event){
         emailError.innerText = email.validationMessage;
         test = false;
 
-    }
-
-    else{
+    }else{
 
         emailError.innerText = "";
 
@@ -84,4 +73,5 @@ function validaFormulario(event){
 
 }
 
+// Añadir evento
 formulario.addEventListener("submit", validaFormulario);
