@@ -40,6 +40,8 @@ function validaEmail(){
 
     }
 
+    emailError.innerText = email.validationMessage;
+
     return test;
 
 }
@@ -54,23 +56,34 @@ formulario.setAttribute("novalidate", true);
 // Valida formulario
 function validaFormulario(event){
 
-    let test = true;
+    // No es necesario ya que solo es una validacion y ya muestro el error en validaEmail()
 
-    if(!validaEmail()){
+    // let test = true;
 
-        emailError.innerText = email.validationMessage;
-        test = false;
+    // if(!validaEmail()){
 
-    }else{
+    //     emailError.innerText = email.validationMessage;
+    //     emailError.className = "error active";
+    //     test = false;
 
-        emailError.innerText = "";
+    // }else{
 
-    }
+    //     emailError.innerText = "";
+    //     emailError.className = "error";
+
+    // }
+
+    // if(!test){
+
+    //     event.preventDefault();
+
+    // }
+
+    let test = validaEmail();
 
     if(!test){
 
         event.preventDefault();
-
     }
 
     return test;
