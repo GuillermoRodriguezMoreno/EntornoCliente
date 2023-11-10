@@ -1,11 +1,9 @@
 // Variables
-
 const email = document.getElementById("mail");
 const formulario = document.querySelector("form");
 const emailError = document.querySelector("#emailError span");
 
 // Funciones
-
 function validaEmail(){
 
     let test = true;
@@ -15,7 +13,7 @@ function validaEmail(){
 
         email.setCustomValidity("El email debe tener al menos 10 caracteres")
         test = false;
-        
+
     // No es formato email
     }else if(email.validity.typeMismatch){
 
@@ -37,8 +35,9 @@ function validaEmail(){
     }else{
 
         email.setCustomValidity("");
-
     }
+
+    emailError.innerText = email.validationMessage;
 
     return test;
 
@@ -58,23 +57,20 @@ function validaFormulario(event){
 
     if(!validaEmail()){
 
-        emailError.innerText = email.validationMessage;
         test = false;
 
     }else{
 
         emailError.innerText = "";
-
     }
 
     if(!test){
 
         event.preventDefault();
-
     }
 
     return test;
-
+    
 }
 
 // Añadir evento
