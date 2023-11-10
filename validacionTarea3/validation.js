@@ -53,16 +53,39 @@ formulario.setAttribute("novalidate", true);
 // Valida formulario
 function validaFormulario(event){
 
-    let test = true;
+    // No es necesario ya que solo es una validacion y ya muestro el error en validaEmail()
 
-    if(!validaEmail()){
+    // let test = true;
 
+<<<<<<< HEAD
         test = false;
+=======
+    // if(!validaEmail()){
+>>>>>>> 00dc09612664ead694a7301ceff2261b0450fe31
 
-    }else{
+    //     emailError.innerText = email.validationMessage;
+    //     emailError.className = "error active";
+    //     test = false;
 
+<<<<<<< HEAD
         emailError.innerText = "";
     }
+=======
+    // }else{
+
+    //     emailError.innerText = "";
+    //     emailError.className = "error";
+
+    // }
+
+    // if(!test){
+
+    //     event.preventDefault();
+
+    // }
+
+    let test = validaEmail();
+>>>>>>> 00dc09612664ead694a7301ceff2261b0450fe31
 
     if(!test){
 
