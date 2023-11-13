@@ -57,20 +57,12 @@ function validaFormulario(event){
 
     // let test = true;
 
-<<<<<<< HEAD
-        test = false;
-=======
     // if(!validaEmail()){
->>>>>>> 00dc09612664ead694a7301ceff2261b0450fe31
 
     //     emailError.innerText = email.validationMessage;
     //     emailError.className = "error active";
     //     test = false;
 
-<<<<<<< HEAD
-        emailError.innerText = "";
-    }
-=======
     // }else{
 
     //     emailError.innerText = "";
@@ -85,7 +77,6 @@ function validaFormulario(event){
     // }
 
     let test = validaEmail();
->>>>>>> 00dc09612664ead694a7301ceff2261b0450fe31
 
     if(!test){
 
