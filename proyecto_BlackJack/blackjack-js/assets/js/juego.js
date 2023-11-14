@@ -201,8 +201,10 @@ function reset(){
 
     puntosComputadora = 0;
     puntosJugador = 0;
+    turno = "jugador";
     contPuntosJugador.innerText = puntosJugador;
     contPuntosComputadora.innerText = puntosComputadora;
+    botonPedirCarta.disabled = false;
     borrarCartas();
 }
 
@@ -210,11 +212,23 @@ function comprobarGanador(){
 
     let ganador = "";
 
+    // Si se han pasado
+    if(puntosComputadora > 21){
+
+        puntosComputadora = -1;
+
+    }
+    if(puntosJugador > 21){
+
+        puntosJugador = -1;
+    }
+
+    // Comprobar ganador
     if(puntosJugador > puntosComputadora){
 
         ganador = "jugador";
 
-    } else{
+    }else{
 
         ganador = "computadora";
     }
