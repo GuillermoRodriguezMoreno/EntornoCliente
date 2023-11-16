@@ -44,23 +44,15 @@ function funcionalidadPedirCarta(){
     if(comprobarPuntos(puntos)){
 
         botonPedirCarta.setAttribute("disabled", true);
+
+        turnoComputadora();
     }
 
 }
 
 function funcionalidadDetener(){
 
-    botonPedirCarta.disabled = false;
-
-    if(turno == "jugador"){
-
-        turno = "computadora";
-
-    } else{
-
-        botonPedirCarta.setAttribute("disabled", true);
-        alert(comprobarGanador());
-    }
+    turnoComputadora();
 }
 
 function main(){
@@ -197,6 +189,26 @@ function comprobarPuntos(puntos){
     return control;
 }
 
+function turnoComputadora(){
+
+    botonPedirCarta.disabled =  true;
+
+    turno = "computadora";
+
+    do {
+    
+        let carta = sacarCarta();
+
+        insertarImgCarta(carta);
+
+        let puntos = sumarPuntos(carta);
+
+    } while (puntosComputadora < puntosJugador && puntosJugador <= 21);
+
+    setTimeout(() => alert(comprobarGanador()),200);
+
+}
+
 function reset(){
 
     puntosComputadora = 0;
@@ -206,6 +218,7 @@ function reset(){
     contPuntosComputadora.innerText = puntosComputadora;
     botonPedirCarta.disabled = false;
     borrarCartas();
+    baraja = _.shuffle(crearBaraja());
 }
 
 function comprobarGanador(){
