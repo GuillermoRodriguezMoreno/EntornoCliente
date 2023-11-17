@@ -1,5 +1,5 @@
 // Variables globales
-let baraja = crearBaraja();
+let baraja = [];
 let puntosJugador = 0;
 let puntosComputadora = 0;
 let turno = "jugador";
@@ -49,7 +49,6 @@ function crearBaraja(){
 
     let listaPalos = ["C", "D", "H", "S"];
     let carta = [];
-    let baraja = [];
 
     for (let numero = 1; numero <= 13; numero++) {
         
