@@ -27,7 +27,7 @@ main();
 // Añadir eventos
 
 botonPedirCarta.addEventListener("click",funcionalidadPedirCarta);
-botonDetener.addEventListener("click", funcionalidadDetener)
+botonDetener.addEventListener("click", turnoComputadora)
 botonNuevo.addEventListener("click", reset);
 
 
@@ -48,11 +48,6 @@ function funcionalidadPedirCarta(){
         turnoComputadora();
     }
 
-}
-
-function funcionalidadDetener(){
-
-    turnoComputadora();
 }
 
 function main(){
@@ -192,6 +187,7 @@ function comprobarPuntos(puntos){
 function turnoComputadora(){
 
     botonPedirCarta.disabled =  true;
+    botonDetener.disabled = true;
 
     turno = "computadora";
 
@@ -217,6 +213,7 @@ function reset(){
     contPuntosJugador.innerText = puntosJugador;
     contPuntosComputadora.innerText = puntosComputadora;
     botonPedirCarta.disabled = false;
+    botonDetener.disabled = false;
     borrarCartas();
     baraja = _.shuffle(crearBaraja());
 }
