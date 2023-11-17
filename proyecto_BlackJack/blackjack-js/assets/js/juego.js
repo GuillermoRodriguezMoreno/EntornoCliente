@@ -1,5 +1,5 @@
 
-function modulo(){
+(function modulo(){
 
     // Variables globales
     let baraja = [];
@@ -223,6 +223,4 @@ function modulo(){
             cartasComputadora.removeChild(cartasComputadora.firstChild);
         }
     }
-}
-
-modulo();
+})();
