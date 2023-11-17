@@ -1,10 +1,3 @@
-/**
- * 2C = Two of Clubs
- * 2D = Two of Diamonds
- * 2H = Two of Hearts
- * 2S = Two of Spades
- */
-
 // Variables globales
 let baraja = crearBaraja();
 let puntosJugador = 0;
@@ -20,19 +13,15 @@ const cartasComputadora = document.getElementById("computadora-cartas");
 const contPuntosJugador = document.getElementById("puntosJugador");
 const contPuntosComputadora = document.getElementById("puntosComputadora");
 
-// Main
-
-main();
-
 // Añadir eventos
-
 botonPedirCarta.addEventListener("click",funcionalidadPedirCarta);
 botonDetener.addEventListener("click", turnoComputadora)
 botonNuevo.addEventListener("click", reset);
 
+//inicio
+inicio();
 
 // Funciones
-
 function funcionalidadPedirCarta(){
 
     let carta = sacarCarta();
@@ -47,15 +36,13 @@ function funcionalidadPedirCarta(){
 
         turnoComputadora();
     }
-
 }
 
-function main(){
+function inicio(){
 
     baraja = crearBaraja();
 
     barajar();
-
 }
 
 function crearBaraja(){
@@ -70,13 +57,10 @@ function crearBaraja(){
             
             carta = [numero.toString() + palo, +numero];
             baraja.push(carta);
-
         }
-
     }
 
     return baraja;
-
 }
 
 function obtenerImagen(carta){
@@ -96,21 +80,18 @@ function obtenerImagen(carta){
 
             carta[0] = "J" + palo; //nombre
             carta[1] = 10; // Valor
-
             break;
             
         case 12:
 
             carta[0] = "Q" + palo;
             carta[1] = 10;
-
             break;
 
         case 13:
 
             carta[0] = "K" + palo;
             carta[1] = 10;
-
             break;
 
         case 1:
@@ -119,7 +100,6 @@ function obtenerImagen(carta){
             carta[1] = 11;
  
     }
-
 
     imgCarta = carta[0] + ".png";
     
@@ -153,7 +133,6 @@ function insertarImgCarta(carta){
 
         cartasComputadora.append(img);
     }
-
 }
 
 function sumarPuntos(carta){
@@ -197,12 +176,11 @@ function turnoComputadora(){
 
         insertarImgCarta(carta);
 
-        let puntos = sumarPuntos(carta);
+        sumarPuntos(carta);
 
     } while (puntosComputadora < puntosJugador && puntosJugador <= 21);
 
     setTimeout(() => alert(comprobarGanador()),200);
-
 }
 
 function reset(){
@@ -215,7 +193,8 @@ function reset(){
     botonPedirCarta.disabled = false;
     botonDetener.disabled = false;
     borrarCartas();
-    baraja = _.shuffle(crearBaraja());
+    crearBaraja();
+    barajar();
 }
 
 function comprobarGanador(){
@@ -226,7 +205,6 @@ function comprobarGanador(){
     if(puntosComputadora > 21){
 
         puntosComputadora = -1;
-
     }
     if(puntosJugador > 21){
 
@@ -251,13 +229,11 @@ function borrarCartas(){
     while (cartasJugador.firstChild) {
 
         cartasJugador.removeChild(cartasJugador.firstChild);
-
     }
 
     while (cartasComputadora.firstChild) {
 
         cartasComputadora.removeChild(cartasComputadora.firstChild);
-
     }
 }
 
