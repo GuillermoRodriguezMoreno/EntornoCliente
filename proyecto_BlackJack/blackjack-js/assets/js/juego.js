@@ -30,7 +30,7 @@ function funcionalidadPedirCarta(){
 
     let puntos = sumarPuntos(carta);
 
-    if(comprobarPuntos(puntos)){
+    if(comprobarPuntos(puntos)){ // Comprueba si se pasa de 21
 
         botonPedirCarta.setAttribute("disabled", true);
 
@@ -48,7 +48,7 @@ function inicio(){
 function crearBaraja(){
 
     let listaPalos = ["C", "D", "H", "S"];
-    let carta = [];
+    let carta = []; // Carta es un array [figura, valor]
 
     for (let numero = 1; numero <= 13; numero++) {
         
@@ -65,9 +65,9 @@ function crearBaraja(){
 function obtenerImagen(carta){
 
     let imgCarta = "";
-    let arrayChar = carta[0].split("");
+    let arrayChar = carta[0].split(""); // Parto por caracteres
 
-    let palo = arrayChar[arrayChar.length - 1];
+    let palo = arrayChar[arrayChar.length - 1]; // obtengo el ultimo (palo)
 
     // Voy a obtener el valor numerico de la carta
     let numero = carta[1];
@@ -124,7 +124,7 @@ function insertarImgCarta(carta){
     img.src = path + obtenerImagen(carta);
     img.className = "carta";
 
-
+    // Añado carta en lugar correspondiente segun turno
     (turno == "jugador") ? cartasJugador.append(img) : cartasComputadora.append(img);
     
 }
