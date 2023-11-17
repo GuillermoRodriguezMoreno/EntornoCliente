@@ -125,14 +125,9 @@ function insertarImgCarta(carta){
     img.src = path + obtenerImagen(carta);
     img.className = "carta";
 
-    if(turno == "jugador"){
 
-        cartasJugador.append(img);
-
-    } else{
-
-        cartasComputadora.append(img);
-    }
+    (turno == "jugador") ? cartasJugador.append(img) : cartasComputadora.append(img);
+    
 }
 
 function sumarPuntos(carta){
@@ -155,10 +150,7 @@ function comprobarPuntos(puntos){
 
     let control = false;
 
-    if(puntos > 21){
-
-        control = true;
-    }
+    (puntos > 21) ? control = true : control = false;
 
     return control;
 }
@@ -193,7 +185,7 @@ function reset(){
     botonPedirCarta.disabled = false;
     botonDetener.disabled = false;
     borrarCartas();
-    crearBaraja();
+    baraja = crearBaraja();
     barajar();
 }
 
@@ -212,14 +204,7 @@ function comprobarGanador(){
     }
 
     // Comprobar ganador
-    if(puntosJugador > puntosComputadora){
-
-        ganador = "jugador";
-
-    }else{
-
-        ganador = "computadora";
-    }
+    (puntosJugador > puntosComputadora) ? ganador = "jugador" : ganador = "computadora";
 
     return ganador;
 }
