@@ -1,11 +1,15 @@
 
-(function modulo(){
+//(function modulo(){
 
     // Variables globales
     let baraja = [];
     let puntosJugador = 0;
     let puntosComputadora = 0;
     let turno = "jugador";
+    let victoriasJugador = parseInt(localStorage.getItem("victoriasJugador")); // La primera vez dara null pero lo tratamos en inicio()
+    let victoriasComputadora = parseInt(localStorage.getItem("victoriasComputadora")); // "
+    // Variable para indicar si el juego está comenzado
+    let juegoIniciado = false;
 
     // Variable HTML
     const botonPedirCarta = document.getElementById("btnPedir");
@@ -21,11 +25,27 @@
     botonDetener.addEventListener("click", turnoComputadora)
     botonNuevo.addEventListener("click", reset);
 
+    // Añadir evento al cerrar ventana (HECHO POR IA)
+    window.addEventListener("beforeunload", function(event) {
+        // Verifica si el juego está comenzado
+        if (juegoIniciado) {
+
+            ++victoriasComputadora;
+            localStorage.setItem("victoriasComputadora", victoriasComputadora.toString());
+            localStorage.setItem("victoriasJugador", victoriasJugador.toString()); // actualizar valor
+            // Establece una variable para indicar que el juego ha terminado
+            event.returnValue = "El juego se ha cancelado y la computadora ha ganado";
+        }
+      });
+
     //inicio
     inicio();
 
     // Funciones
     function funcionalidadPedirCarta(){
+
+        // Inicia juego cuando se saca una carta por primera vez
+        juegoIniciado = true;
 
         let carta = sacarCarta();
 
@@ -46,6 +66,16 @@
         baraja = crearBaraja();
 
         barajar();
+
+        if(isNaN(victoriasComputadora)){ // NaN porque es lo que devuelve al intentar parsear el null
+
+            victoriasComputadora = 0;
+        }
+
+        if(isNaN(victoriasJugador)){
+
+            victoriasJugador = 0;
+        }
     }
 
     function crearBaraja(){
@@ -174,7 +204,8 @@
 
         } while (puntosComputadora < puntosJugador && puntosJugador <= 21);
 
-        setTimeout(() => alert(comprobarGanador()),200);
+        setTimeout(() => alert(comprobarGanador() + "\nVictorias Jugador: " + victoriasJugador.toString() + 
+                                "\nVictorias Computadora: " + victoriasComputadora.toString()),200);
     }
 
     function reset(){
@@ -182,6 +213,7 @@
         puntosComputadora = 0;
         puntosJugador = 0;
         turno = "jugador";
+        juegoIniciado = false;
         contPuntosJugador.innerText = puntosJugador;
         contPuntosComputadora.innerText = puntosComputadora;
         botonPedirCarta.disabled = false;
@@ -192,6 +224,9 @@
     }
 
     function comprobarGanador(){
+
+        // El juego ha terminado
+        juegoIniciado = false;
 
         let ganador = "";
 
@@ -208,6 +243,13 @@
         // Comprobar ganador
         (puntosJugador > puntosComputadora) ? ganador = "jugador" : ganador = "computadora";
 
+        // Sumar vitorias
+        (ganador == "jugador") ? ++victoriasJugador : ++victoriasComputadora;
+
+        // Añadirlo a localStorage
+        localStorage.setItem("victoriasJugador", victoriasJugador.toString());
+        localStorage.setItem("victoriasComputadora", victoriasComputadora.toString());
+
         return ganador;
     }
 
@@ -223,4 +265,4 @@
             cartasComputadora.removeChild(cartasComputadora.firstChild);
         }
     }
-})();
+//})();
