@@ -1,0 +1,7 @@
+1 listado
+    -get /peliculas
+    - bucle + <li>
+
+2 Evento en los li para que salga la pelicula a la derecfa
+
+3 cargar la pelicula n y mostrar la info y poner "cargando"
