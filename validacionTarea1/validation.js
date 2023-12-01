@@ -16,35 +16,23 @@ const comentarioError = document.querySelector("#comentarioError span");
 // Funciones
 
 function validarNombre(){
-
     let test = true;
-
     if(nombre.value.length < 1){
-
         nombre.setCustomValidity("El nombre no puede estar vacio");
         test = false;
-
     }
-
     else if(nombre.value.length < 5 || nombre.value.length > 20){
-
         nombre.setCustomValidity("El nombre debe tener entre 5 y 20 caracteres")
         test = false;
-
     }
-
-    else{
-
+    else
         nombre.setCustomValidity("");
-
-    }
-
+    
     return test;
-
 }
 
 function validarEmail(){
-
+    
     let test = true;
 
     if(email.value.length < 1){
