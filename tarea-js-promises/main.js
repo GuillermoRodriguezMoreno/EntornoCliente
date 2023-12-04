@@ -5,7 +5,7 @@ const baseURL = "http://localhost:3000/";
 const contenedorListadoPelicula = document.getElementById("listado");
 const infoDirector = document.getElementById("director");
 const infoClasificacion = document.getElementById("clasificacion");
-const infoValoracion = document.getElementById("estrellas");
+const infoValoracion = document.querySelector(".estrellas");
 const infoCartel = document.querySelector("#cartel img");
 
 // Variables globales
@@ -81,7 +81,6 @@ function insertarDatos(pelicula){
 
     infoDirector.innerText = pelicula.director;
     clasificacion = buscarClasificacion(pelicula.clasificacion);
-    infoClasificacion.innerText = clasificacion.nombre;
     pintarClasificacion(pelicula);
     infoCartel.setAttribute("src", "assets/imgs/" + pelicula.cartel);
 
@@ -90,7 +89,7 @@ function insertarDatos(pelicula){
 function buscarClasificacion(idClasificacion){
 
     let clasificacion = null;
-    let ruta = baseURL + "clasificaciones/" + idClasificacion // traza depuracion
+    let ruta = baseURL + "clasificaciones/" + idClasificacion; // traza depuracion
 
     fetch(ruta).then( resp => {
 
@@ -98,8 +97,9 @@ function buscarClasificacion(idClasificacion){
     
             resp.json().then(data => {
     
-                clasificacion = data
-                console.log("fetch leído");
+                clasificacion = data;
+                infoClasificacion.innerText = clasificacion.nombre;
+                console.log("fetch leído clasificacion");
                 return clasificacion;
             })
     
@@ -107,13 +107,13 @@ function buscarClasificacion(idClasificacion){
     
             console.log("El recurso no existe");
         }
-
-        return clasificacion;
         
     }).catch ( error => console.log("fetch error:" + error));
 }
 
 function pintarClasificacion(pelicula){
+
+    borrarEstrellas();
 
     let estrellasTotales = pelicula.valoracion;
 
@@ -122,5 +122,13 @@ function pintarClasificacion(pelicula){
         let iconoEstrella = document.createElement("i");
         iconoEstrella.className = "fa fa-star";
         infoValoracion.append(iconoEstrella);
+    }
+}
+
+function borrarEstrellas(){
+
+    while (infoValoracion.firstChild) {
+
+        infoValoracion.removeChild(infoValoracion.firstChild);
     }
 }
