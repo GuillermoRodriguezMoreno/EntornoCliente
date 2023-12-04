@@ -1,0 +1,37 @@
+
+#listado-peliculas{
+
+    padding: 20px;
+}
+
+#listado-peliculas h2{
+    text-align: center;
+    cursor: pointer;
+}
+
+#listado-peliculas h2:hover{
+
+    font-size: 35px ;
+}
+
+ul{
+
+    list-style: none;
+}
+
+li{
+
+    text-align: center;
+    padding: 10px;
+    margin: 20px;
+    border: 2px solid black;
+    border-radius: 5px;
+    font-weight: bold;
+    background-color: rgb(101, 101, 192);
+    cursor: pointer;
+}
+
+li:hover{
+
+    background-color: brown;
+}

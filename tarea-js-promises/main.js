@@ -3,16 +3,17 @@ const baseURL = "http://localhost:3000/";
 
 // Variables HTML
 const contenedorListadoPelicula = document.getElementById("listado");
+const titulo = document.querySelector("#listado-peliculas h2");
+const contenedorInfoPelicula = document.getElementById("info-pelicula");
 const infoDirector = document.getElementById("director");
 const infoClasificacion = document.getElementById("clasificacion");
 const infoValoracion = document.querySelector(".estrellas");
 const infoCartel = document.querySelector("#cartel img");
 
-// Variables globales
-let listaPeliculas = [];
+// eventos
+titulo.addEventListener("click", mostrarListaPeliculas);
 
 // Main
-
 mostrarListaPeliculas();
 
 // Funciones
@@ -32,16 +33,19 @@ function insertarListado(listaPeliculas){
 
 function mostrarListaPeliculas(){
 
+    borrarListaPeliculas(); // Resetear lista de peliculas
+
     fetch(baseURL + "peliculas/").then( resp => {
 
-        if (resp.status == 200) {
+        if (resp.status == 200) { // Fetch correcto
     
-            resp.json().then(data => {
+            contenedorInfoPelicula.style.display = "none"; // Oculto info pelicula
+    
+            resp.json().then(data => { // Obtencion JSON correcto
     
                 listaPeliculas = data;
-                // crear <li> (listado de peliculas)
-                insertarListado(listaPeliculas);
-                console.log("fetch leído");
+                insertarListado(listaPeliculas); // Inserto listado
+                console.log("fetch leído lista peliculas");
             })
     
         } else {
@@ -53,8 +57,11 @@ function mostrarListaPeliculas(){
 }
 
 function mostrarInformacion(id){
-    
-    fetch(baseURL + "pelicula/" + id.toString()).then( resp => {
+
+    contenedorInfoPelicula.style.display = "block"; // Muestro info pelicula
+    reset(); // Reset de informacion para que aparezca cargando...
+
+    fetchSlow(baseURL + "pelicula/" + id.toString()).then( resp => {
 
         let pelicula = null
 
@@ -63,13 +70,14 @@ function mostrarInformacion(id){
             resp.json().then(data => {
     
                 pelicula = data;
-                insertarDatos(pelicula);
-                console.log("fetch leído");
+                insertarDatos(pelicula); // Inserto datos
+                console.log("fetch leído informacion pelicula");
             })
 
         } else {
 
             console.log("El recurso no existe");
+            contenedorInfoPelicula.innerText = "Error al leer informacion de la pelicula"; // Muestro error
         }
 
     }).catch ( error => console.log("fetch error:" + error));
@@ -77,19 +85,19 @@ function mostrarInformacion(id){
 
 function insertarDatos(pelicula){
 
-    let clasificacion = null;
+    let clasificacion = null; // Recojo clasificacion por si la necesitara
 
     infoDirector.innerText = pelicula.director;
     clasificacion = buscarClasificacion(pelicula.clasificacion);
-    pintarClasificacion(pelicula);
-    infoCartel.setAttribute("src", "assets/imgs/" + pelicula.cartel);
+    pintarEstrellas(pelicula); // Pinta estrellas de valoracion
+    infoCartel.setAttribute("src", "assets/imgs/" + pelicula.cartel); // Cambio gif por cartel
 
 }
 
 function buscarClasificacion(idClasificacion){
 
     let clasificacion = null;
-    let ruta = baseURL + "clasificaciones/" + idClasificacion; // traza depuracion
+    let ruta = baseURL + "clasificaciones/" + idClasificacion; // Traza depuracion
 
     fetch(ruta).then( resp => {
 
@@ -111,9 +119,9 @@ function buscarClasificacion(idClasificacion){
     }).catch ( error => console.log("fetch error:" + error));
 }
 
-function pintarClasificacion(pelicula){
+function pintarEstrellas(pelicula){
 
-    borrarEstrellas();
+    borrarEstrellas(); // Reset estrellas
 
     let estrellasTotales = pelicula.valoracion;
 
@@ -131,4 +139,20 @@ function borrarEstrellas(){
 
         infoValoracion.removeChild(infoValoracion.firstChild);
     }
+}
+
+function borrarListaPeliculas(){
+
+    while (contenedorListadoPelicula.firstChild) {
+
+        contenedorListadoPelicula.removeChild(contenedorListadoPelicula.firstChild);
+    }
+}
+
+function reset(){
+
+    infoDirector.innerText = "cargando...";
+    infoClasificacion.innerText = "cargando...";
+    infoValoracion.innerText = "cargando...";
+    infoCartel.setAttribute("src", "assets/imgs/circle-9360_128.gif");
 }
