@@ -20,12 +20,11 @@ mostrarListaPeliculas();
 function insertarListado(listaPeliculas){
 
     let li;
-    
+
     for (const pelicula of listaPeliculas) {
-    
+
         li = document.createElement("li")
         li.innerText = pelicula.nombre
-    
         li.addEventListener("click", () => {mostrarInformacion(pelicula.id)})
         contenedorListadoPelicula.append(li);
     }
@@ -50,9 +49,9 @@ function mostrarListaPeliculas(){
     
         } else {
     
-            console.log("El recurso no existe");
+            console.log("El recurso lista peliculas no existe");
         }
-        
+
     }).catch ( error => console.log("fetch error:" + error));
 }
 
@@ -76,8 +75,7 @@ function mostrarInformacion(id){
 
         } else {
 
-            console.log("El recurso no existe");
-            contenedorInfoPelicula.innerText = "Error al leer informacion de la pelicula"; // Muestro error
+            console.log("El recurso informacion de pelicula no existe");
         }
 
     }).catch ( error => console.log("fetch error:" + error));
@@ -91,7 +89,6 @@ function insertarDatos(pelicula){
     clasificacion = buscarClasificacion(pelicula.clasificacion);
     pintarEstrellas(pelicula); // Pinta estrellas de valoracion
     infoCartel.setAttribute("src", "assets/imgs/" + pelicula.cartel); // Cambio gif por cartel
-
 }
 
 function buscarClasificacion(idClasificacion){
@@ -110,12 +107,11 @@ function buscarClasificacion(idClasificacion){
                 console.log("fetch leído clasificacion");
                 return clasificacion;
             })
-    
         } else {
     
-            console.log("El recurso no existe");
+            console.log("El recurso clasificaciones no existe");
         }
-        
+
     }).catch ( error => console.log("fetch error:" + error));
 }
 
