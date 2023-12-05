@@ -135,7 +135,6 @@ function buscarClasificacion(idClasificacion){
 function pintarEstrellas(pelicula){
 
     borrarEstrellas(); // Reset estrellas
-
     let estrellasTotales = pelicula.valoracion;
 
     for (let i = 0; i < estrellasTotales; i++) {
