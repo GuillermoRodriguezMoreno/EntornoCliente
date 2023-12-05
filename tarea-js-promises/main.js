@@ -9,6 +9,8 @@ const infoDirector = document.getElementById("director");
 const infoClasificacion = document.getElementById("clasificacion");
 const infoValoracion = document.querySelector(".estrellas");
 const infoCartel = document.querySelector("#cartel img");
+const errorLista = document.getElementById("errorLista");
+const errorInfo = document.getElementById("errorInfo");
 
 // eventos
 titulo.addEventListener("click", mostrarListaPeliculas);
@@ -38,6 +40,7 @@ function mostrarListaPeliculas(){
 
         if (resp.status == 200) { // Fetch correcto
     
+            errorLista.style.display = "none"; // Oculto error
             contenedorInfoPelicula.style.display = "none"; // Oculto info pelicula
     
             resp.json().then(data => { // Obtencion JSON correcto
@@ -49,10 +52,14 @@ function mostrarListaPeliculas(){
     
         } else {
     
+            errorLista.style.display = "block"; // Muestro error
             console.log("El recurso lista peliculas no existe");
         }
 
-    }).catch ( error => console.log("fetch error:" + error));
+    }).catch ( error => {
+        
+        errorLista.style.display = "block"; // Muestro error
+        console.log("fetch error:" + error)});
 }
 
 function mostrarInformacion(id){
@@ -67,7 +74,8 @@ function mostrarInformacion(id){
         if (resp.status == 200) {
     
             resp.json().then(data => {
-    
+
+                errorInfo.style.display = "none";
                 pelicula = data;
                 insertarDatos(pelicula); // Inserto datos
                 console.log("fetch leído informacion pelicula");
@@ -75,10 +83,14 @@ function mostrarInformacion(id){
 
         } else {
 
+            errorInfo.style.display = "block";
             console.log("El recurso informacion de pelicula no existe");
         }
 
-    }).catch ( error => console.log("fetch error:" + error));
+    }).catch ( error => {
+        
+        errorInfo.style.display = "block"
+        console.log("fetch error:" + error)});
 }
 
 function insertarDatos(pelicula){
@@ -102,6 +114,7 @@ function buscarClasificacion(idClasificacion){
     
             resp.json().then(data => {
     
+                errorInfo.style.display = "none";
                 clasificacion = data;
                 infoClasificacion.innerText = clasificacion.nombre;
                 console.log("fetch leído clasificacion");
@@ -109,10 +122,14 @@ function buscarClasificacion(idClasificacion){
             })
         } else {
     
+            errorInfo.style.display = "block";
             console.log("El recurso clasificaciones no existe");
         }
 
-    }).catch ( error => console.log("fetch error:" + error));
+    }).catch ( error => {
+        
+        errorInfo.style.display = "block";
+        console.log("fetch error:" + error)});
 }
 
 function pintarEstrellas(pelicula){
