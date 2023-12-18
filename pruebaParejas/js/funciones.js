@@ -128,3 +128,43 @@ function pintarIntentos(intentos){
     const contenedor = document.getElementById("intentos");
     contenedor.innerText=intentos;
 }
+
+function obtenerListaUsuarios(){
+
+    fetch("http://localhost:3000/jugador").then( resp => {
+        if (resp.status == 200) {
+            resp.json().then(data => {
+                listaUsuarios = data;
+                console.log("fetch leído");
+            })
+        } else {
+            listaUsuarios=null
+            console.log("no existe");
+            
+        }
+    }).catch ( error => console.log("fetch2 error:" + error));
+
+}
+
+function comprobarUsuario(){
+
+    let mensaje = "";
+    let valorUsuario = usuarioInput.value;
+
+
+    for (const jugador of listaUsuarios) {
+        
+        if(jugador.nombre == valorUsuario){
+
+            saludo.innerText= jugadorActual.usuario;
+            mensaje = "usuario logeado: " + jugador.nombre;
+            break;
+        }
+        else{
+
+            mensaje = "Usuairio no encontrado";
+        }
+    }
+
+    alert(mensaje);
+}
