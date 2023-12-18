@@ -71,12 +71,48 @@ function cartaClick(i, carta){
 
     if(carta.src.includes("red")){
 
+        if(turno < 1){
+
+            intentos++;
+            pintarIntentos(intentos);
+        }
+        
+
         carta.src=obtenerImagen(listaCartas[i]);
+
+        turno++;
+        cartaAux = cartaActual;
+        indiceAux = indiceActual
+        cartaActual = listaCartas[i];
+        indiceActual = i;
+
+        if(turno == 2){
+
+            if(cartaActual == cartaAux){
+
+                aciertos++;
+            }else{
+
+                contadorFallos++;
+                resetCarta(indiceActual, indiceAux);
+            }
+
+            turno = 0;
+        }
     }
-    
 }
 
-function resetCartas(){
+function resetCarta(i, j){
+
+    setTimeout(() => {
+    let dorso = "assets/img/cartas/red_back.png";
+    const carta1 = document.getElementById("carta"+i);
+    carta1.src = dorso;
+    const carta2 = document.getElementById("carta"+j);
+    carta2.src = dorso;}, 500);
+}
+
+function resetTodasCartas(){
 
     let dorso = "assets/img/cartas/red_back.png";
 
@@ -85,4 +121,10 @@ function resetCartas(){
         const carta = document.getElementById("carta"+i);
         carta.src = dorso;
     }
+}
+
+function pintarIntentos(intentos){
+
+    const contenedor = document.getElementById("intentos");
+    contenedor.innerText=intentos;
 }
